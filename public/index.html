@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Smart IoT Waste Management Dashboard"
+    >
+
+    <title>
+        Smart Waste Management
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ================================================
+         NAVIGATION
+    ================================================= -->
+
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <a
+                href="index.html"
+                class="brand"
+            >
+
+                <div class="brand-logo">
+                    ♻
+                </div>
+
+                <div class="brand-copy">
+
+                    <h1>
+                        Smart Waste Management
+                    </h1>
+
+                    <p>
+                        IoT Waste Segregation System
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <nav class="navigation">
+
+                <a
+                    href="index.html"
+                    class="nav-link active"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="admin.html"
+                    class="nav-link"
+                >
+                    Admin Panel
+                </a>
+
+                <div
+                    id="connectionPill"
+                    class="connection-pill online"
+                >
+
+                    <span class="connection-dot"></span>
+
+                    <span id="connectionText">
+                        Connected
+                    </span>
+
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================================
+         MAIN
+    ================================================= -->
+
+    <main class="main-container">
+
+
+        <!-- ============================================
+             LOCATION + BIN FILTERS
+        ============================================= -->
+
+        <section class="filter-card">
+
+            <div class="filter-heading">
+
+                <div class="filter-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <span class="small-label">
+                        MONITORING FILTER
+                    </span>
+
+                    <h2>
+                        Select Location & Bin
+                    </h2>
+
+                    <p>
+                        Choose a registered dustbin to
+                        view its live status.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="filter-controls">
+
+                <div class="form-field">
+
+                    <label for="locationSelect">
+                        Location
+                    </label>
+
+                    <select
+                        id="locationSelect"
+                    >
+
+                        <option>
+                            Loading...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="binSelect">
+                        Dustbin
+                    </label>
+
+                    <select
+                        id="binSelect"
+                    >
+
+                        <option>
+                            Loading...
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             PAGE HEADING
+        ============================================= -->
+
+        <section class="page-heading">
+
+            <div>
+
+                <span class="section-label">
+                    LIVE MONITORING
+                </span>
+
+                <h2>
+                    Dustbin Monitoring Dashboard
+                </h2>
+
+                <p>
+                    Real-time waste levels, lid activity
+                    and sensor diagnostics.
+                </p>
+
+            </div>
+
+
+            <div class="live-badge">
+
+                <span></span>
+
+                Live Data
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             CURRENT BIN
+        ============================================= -->
+
+        <div class="current-bin">
+
+            <span>
+                Monitoring:
+            </span>
+
+            <strong id="currentBinId">
+                —
+            </strong>
+
+            <span class="divider">
+                •
+            </span>
+
+            <span id="currentLocation">
+                —
+            </span>
+
+        </div>
+
+
+
+        <!-- ============================================
+             LID STATUS
+        ============================================= -->
+
+        <section class="status-card card">
+
+            <div class="status-main">
+
+                <div
+                    id="lidIcon"
+                    class="status-icon blue-icon"
+                >
+                    🗑️
+                </div>
+
+                <div>
+
+                    <span class="card-label">
+                        LID & SORTING STATUS
+                    </span>
+
+                    <h2 id="lidState">
+                        Closed
+                    </h2>
+
+                    <p id="lidDescription">
+                        Dustbin is idle and ready.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="system-state">
+
+                <span class="green-dot"></span>
+
+                System Active
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             WASTE LEVELS
+        ============================================= -->
+
+        <section class="waste-grid">
+
+
+            <!-- WET -->
+
+            <article
+                id="wetCard"
+                class="waste-card card"
+            >
+
+                <div class="waste-header">
+
+                    <div class="waste-title">
+
+                        <div class="waste-icon wet-icon">
+                            💧
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Wet Waste
+                            </h3>
+
+                            <p>
+                                Moisture-based compartment
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <strong
+                        id="wetLevel"
+                        class="level green-level"
+                    >
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="wetProgress"
+                        class="progress-fill wet-fill"
+                    ></div>
+
+                </div>
+
+
+                <div class="waste-footer">
+
+                    <span>
+                        Current capacity
+                    </span>
+
+                    <strong
+                        id="wetAlert"
+                        class="normal"
+                    >
+                        Normal
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DRY -->
+
+            <article
+                id="dryCard"
+                class="waste-card card"
+            >
+
+                <div class="waste-header">
+
+                    <div class="waste-title">
+
+                        <div class="waste-icon dry-icon">
+                            📦
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Dry Waste
+                            </h3>
+
+                            <p>
+                                Dry waste compartment
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <strong
+                        id="dryLevel"
+                        class="level blue-level"
+                    >
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="dryProgress"
+                        class="progress-fill dry-fill"
+                    ></div>
+
+                </div>
+
+
+                <div class="waste-footer">
+
+                    <span>
+                        Current capacity
+                    </span>
+
+                    <strong
+                        id="dryAlert"
+                        class="normal"
+                    >
+                        Normal
+                    </strong>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+
+        <!-- ============================================
+             SENSOR DIAGNOSTICS
+        ============================================= -->
+
+        <section class="diagnostics">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        HARDWARE
+                    </span>
+
+                    <h2>
+                        Sensor Diagnostics
+                    </h2>
+
+                </div>
+
+                <span class="diagnostic-live">
+                    ● Live
+                </span>
+
+            </div>
+
+
+            <div class="diagnostic-grid">
+
+
+                <!-- ESP32 -->
+
+                <article class="diagnostic-card">
+
+                    <div class="diagnostic-icon green-icon">
+                        📡
+                    </div>
+
+                    <div class="diagnostic-info">
+
+                        <h3>
+                            ESP32 Connection
+                        </h3>
+
+                        <p>
+                            Real-time microcontroller
+                            communication
+                        </p>
+
+                        <div class="sensor-status">
+
+                            <span
+                                id="esp32Dot"
+                                class="sensor-dot"
+                            ></span>
+
+                            <strong id="esp32Status">
+                                Active
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- MOISTURE -->
+
+                <article class="diagnostic-card">
+
+                    <div class="diagnostic-icon blue-icon">
+                        💧
+                    </div>
+
+                    <div class="diagnostic-info">
+
+                        <h3>
+                            Moisture Sensor
+                        </h3>
+
+                        <p>
+                            Identifies wet waste automatically
+                        </p>
+
+                        <div class="sensor-status">
+
+                            <span
+                                id="moistureDot"
+                                class="sensor-dot"
+                            ></span>
+
+                            <strong id="moistureStatus">
+                                Standby
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- ULTRASONIC -->
+
+                <article class="diagnostic-card">
+
+                    <div class="diagnostic-icon purple-icon">
+                        📏
+                    </div>
+
+                    <div class="diagnostic-info">
+
+                        <h3>
+                            Ultrasonic Sensor
+                        </h3>
+
+                        <p>
+                            Measures waste compartment level
+                        </p>
+
+                        <div class="sensor-status">
+
+                            <span
+                                id="ultrasonicDot"
+                                class="sensor-dot"
+                            ></span>
+
+                            <strong id="ultrasonicStatus">
+                                Measuring
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             FOOTER
+        ============================================= -->
+
+        <footer class="footer">
+
+            <span>
+                Smart IoT-based Waste Segregation Dustbin
+            </span>
+
+            <span id="lastUpdated">
+                Last updated: —
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

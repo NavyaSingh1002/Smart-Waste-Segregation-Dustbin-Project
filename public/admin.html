@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Panel | Smart Waste Management
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- ================================================
+         NAVIGATION
+    ================================================= -->
+
+    <header class="topbar">
+
+        <div class="topbar-inner">
+
+            <a
+                href="index.html"
+                class="brand"
+            >
+
+                <div class="brand-logo">
+                    ♻
+                </div>
+
+                <div class="brand-copy">
+
+                    <h1>
+                        Smart Waste Management
+                    </h1>
+
+                    <p>
+                        IoT Waste Segregation System
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <nav class="navigation">
+
+                <a
+                    href="index.html"
+                    class="nav-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="admin.html"
+                    class="nav-link active"
+                >
+                    Admin Panel
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================================================
+         MAIN
+    ================================================= -->
+
+    <main class="main-container admin-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <section class="page-heading admin-heading">
+
+            <div>
+
+                <span class="section-label">
+                    MANAGEMENT
+                </span>
+
+                <h2>
+                    Admin Control Panel
+                </h2>
+
+                <p>
+                    Manage monitoring locations and
+                    registered dustbins.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             NOTIFICATION
+        ============================================= -->
+
+        <div
+            id="adminMessage"
+            class="admin-message"
+        ></div>
+
+
+
+        <!-- ============================================
+             LOCATION MANAGEMENT
+        ============================================= -->
+
+        <section class="admin-section card">
+
+            <div class="admin-section-heading">
+
+                <div class="admin-section-icon green-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h2>
+                        Location Management
+                    </h2>
+
+                    <p>
+                        Add or remove areas where
+                        smart dustbins are installed.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Add Location Form -->
+
+            <form
+                id="locationForm"
+                class="admin-form"
+            >
+
+                <div class="form-field">
+
+                    <label for="locationName">
+                        New Location / Area
+                    </label>
+
+                    <input
+                        type="text"
+                        id="locationName"
+                        placeholder="e.g. Engineering Block"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    + Add Location
+                </button>
+
+            </form>
+
+
+            <!-- Location List -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Registered Bins
+                            </th>
+
+                            <th class="action-column">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="locationsTable">
+
+                        <!-- JavaScript inserts rows -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             BIN MANAGEMENT
+        ============================================= -->
+
+        <section class="admin-section card">
+
+            <div class="admin-section-heading">
+
+                <div class="admin-section-icon blue-icon">
+                    🗑️
+                </div>
+
+                <div>
+
+                    <h2>
+                        Dustbin Management
+                    </h2>
+
+                    <p>
+                        Register new IoT dustbins and
+                        assign them to locations.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Add Bin Form -->
+
+            <form
+                id="binForm"
+                class="admin-form bin-form"
+            >
+
+                <div class="form-field">
+
+                    <label for="binId">
+                        Bin ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="binId"
+                        placeholder="e.g. BIN-ENG-001"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="binLocation">
+                        Assign Location
+                    </label>
+
+                    <select
+                        id="binLocation"
+                        required
+                    >
+
+                        <option value="">
+                            Select location
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="primary-button blue-button"
+                >
+                    + Add Bin
+                </button>
+
+            </form>
+
+
+            <!-- Bin Table -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Bin ID
+                            </th>
+
+                            <th>
+                                Location
+                            </th>
+
+                            <th>
+                                Wet
+                            </th>
+
+                            <th>
+                                Dry
+                            </th>
+
+                            <th class="action-column">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="binsTable">
+
+                        <!-- JavaScript inserts rows -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================================
+             FOOTER
+        ============================================= -->
+
+        <footer class="footer">
+
+            <span>
+                Admin Control Panel
+            </span>
+
+            <a href="index.html">
+                ← Back to Dashboard
+            </a>
+
+        </footer>
+
+    </main>
+
+
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
