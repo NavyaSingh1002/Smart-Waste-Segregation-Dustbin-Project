@@ -571,11 +571,9 @@ setInterval(() => {
     // Pick a random bin
     const bin = allBins[Math.floor(Math.random() * allBins.length)];
 
-    // Kachra badhao (Simulating people throwing waste)
     bin.wetLevel += Math.floor(Math.random() * 6);
     bin.dryLevel += Math.floor(Math.random() * 6);
 
-    // MAGIC TRICK: Agar dustbin bhar gaya (95% se zyada), toh usko khali kar do (0%)
     if (bin.wetLevel > 95) bin.wetLevel = 0;
     if (bin.dryLevel > 95) bin.dryLevel = 0;
 
