@@ -561,102 +561,11 @@ app.post("/api/ingest", (req, res) => {
 });
 
 
-// =====================================================
-// MOCK ESP32 DATA GENERATOR
-// =====================================================
-//
-// This is ONLY for demonstration.
-//
-// Every 5 seconds, one random bin receives slightly
-// changing values to make the dashboard appear live.
-//
-// Later, this can simply be removed when real ESP32
-// hardware sends data to /api/ingest.
-// =====================================================
-
-setInterval(() => {
-
-    const allBins = locations.flatMap(
-        location => location.bins
-    );
 
 
-    if (allBins.length === 0) {
-        return;
-    }
 
 
-    const bin =
-        allBins[
-            Math.floor(
-                Math.random() * allBins.length
-            )
-        ];
 
-
-    // Randomly increase/decrease levels.
-
-    bin.wetLevel = Math.max(
-        0,
-        Math.min(
-            100,
-            bin.wetLevel +
-                Math.floor(Math.random() * 5) - 1
-        )
-    );
-
-
-    bin.dryLevel = Math.max(
-        0,
-        Math.min(
-            100,
-            bin.dryLevel +
-                Math.floor(Math.random() * 5) - 1
-        )
-    );
-
-
-    // Randomly simulate lid activity.
-
-    const state =
-        Math.random();
-
-
-    if (state < 0.15) {
-
-        bin.lidState = "Sorting";
-
-        bin.sensors.moisture =
-            "Detecting";
-
-    } else if (state < 0.30) {
-
-        bin.lidState = "Open";
-
-        bin.sensors.moisture =
-            "Standby";
-
-    } else {
-
-        bin.lidState = "Closed";
-
-        bin.sensors.moisture =
-            "Standby";
-    }
-
-
-    bin.sensors.esp32 =
-        "Active";
-
-    bin.sensors.ultrasonic =
-        "Measuring";
-
-
-    console.log(
-        `[MOCK ESP32] ${bin.id}: Wet ${bin.wetLevel}% | Dry ${bin.dryLevel}% | ${bin.lidState}`
-    );
-
-}, 5000);
 
 
 // =====================================================
