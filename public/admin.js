@@ -194,11 +194,11 @@ function renderLocations(
 
                     <button
                         class="delete-button"
-                        onclick="deleteLocation(
+                        onclick='deleteLocation(
                             ${JSON.stringify(
                                 location.name
                             )}
-                        )"
+                        )'
                     >
                         Delete
                     </button>
@@ -474,7 +474,6 @@ async function deleteLocation(
 
 
     try {
-
         const response =
             await fetch(
                 `${API}/locations/` +
@@ -487,7 +486,6 @@ async function deleteLocation(
 
         const result =
             await response.json();
-
 
         if (!response.ok) {
 

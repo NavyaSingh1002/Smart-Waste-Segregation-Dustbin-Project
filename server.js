@@ -561,11 +561,38 @@ app.post("/api/ingest", (req, res) => {
 });
 
 
+// =====================================================
+// MOCK ESP32 DATA GENERATOR (FOR PRESENTATION)
+// =====================================================
+// Yeh code har 5 second mein apne aap progress bars ko move karega
+setInterval(() => {
+    const allBins = locations.flatMap(location => location.bins);
+    if (allBins.length === 0) return;
 
+    // Pick a random bin
+    const bin = allBins[Math.floor(Math.random() * allBins.length)];
 
+    // Randomly increase/decrease levels to make bars move
+    bin.wetLevel = Math.max(0, Math.min(100, bin.wetLevel + Math.floor(Math.random() * 5) - 1));
+    bin.dryLevel = Math.max(0, Math.min(100, bin.dryLevel + Math.floor(Math.random() * 5) - 1));
 
+    // Randomly simulate lid/sorting activity
+    const state = Math.random();
+    if (state < 0.15) {
+        bin.lidState = "Sorting";
+        bin.sensors.moisture = "Detecting";
+    } else if (state < 0.30) {
+        bin.lidState = "Open";
+        bin.sensors.moisture = "Standby";
+    } else {
+        bin.lidState = "Closed";
+        bin.sensors.moisture = "Standby";
+    }
 
+    bin.sensors.esp32 = "Active";
+    bin.sensors.ultrasonic = "Measuring";
 
+}, 3000);
 
 
 // =====================================================
