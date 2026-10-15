@@ -564,7 +564,6 @@ app.post("/api/ingest", (req, res) => {
 // =====================================================
 // MOCK ESP32 DATA GENERATOR (FOR PRESENTATION)
 // =====================================================
-// Yeh code har 5 second mein apne aap progress bars ko move karega
 setInterval(() => {
     const allBins = locations.flatMap(location => location.bins);
     if (allBins.length === 0) return;
@@ -572,9 +571,13 @@ setInterval(() => {
     // Pick a random bin
     const bin = allBins[Math.floor(Math.random() * allBins.length)];
 
-    // Randomly increase/decrease levels to make bars move
-    bin.wetLevel = Math.max(0, Math.min(100, bin.wetLevel + Math.floor(Math.random() * 5) - 1));
-    bin.dryLevel = Math.max(0, Math.min(100, bin.dryLevel + Math.floor(Math.random() * 5) - 1));
+    // Kachra badhao (Simulating people throwing waste)
+    bin.wetLevel += Math.floor(Math.random() * 6);
+    bin.dryLevel += Math.floor(Math.random() * 6);
+
+    // MAGIC TRICK: Agar dustbin bhar gaya (95% se zyada), toh usko khali kar do (0%)
+    if (bin.wetLevel > 95) bin.wetLevel = 0;
+    if (bin.dryLevel > 95) bin.dryLevel = 0;
 
     // Randomly simulate lid/sorting activity
     const state = Math.random();
