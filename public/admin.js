@@ -349,11 +349,11 @@ function renderBins(
 
                     <button
                         class="delete-button"
-                        onclick="deleteBin(
+                        onclick='deleteBin(
                             ${JSON.stringify(
                                 bin.id
                             )}
-                        )"
+                        )'
                     >
                         Delete
                     </button>
